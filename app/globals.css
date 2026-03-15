@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+:root {
+  --ivory: #faf8f3;
+  --cream: #f5f0e8;
+  --warm-white: #fffef9;
+  --gold: #b8965a;
+  --gold-light: #d4af7a;
+  --gold-pale: #f0e6cc;
+  --gold-dark: #8c6d3f;
+  --charcoal: #2c2c2c;
+  --text-main: #3a3530;
+  --text-sub: #7a7068;
+  --text-light: #a89e94;
+  --border: #e8dfc8;
+  --shadow: rgba(184, 150, 90, 0.12);
+
+  --background: var(--ivory);
+  --foreground: var(--text-main);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--ivory);
+  color: var(--text-main);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold-light);
+  border-radius: 0;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  opacity: 0;
+  animation: fadeUp 0.9s ease forwards;
+}
+
+.animate-delay-100 {
+  animation-delay: 0.1s;
+}
+.animate-delay-200 {
+  animation-delay: 0.2s;
+}
+.animate-delay-400 {
+  animation-delay: 0.4s;
+}
+.animate-delay-600 {
+  animation-delay: 0.6s;
+}
+.animate-delay-800 {
+  animation-delay: 0.8s;
+}
+.animate-delay-1000 {
+  animation-delay: 1s;
+}
+
+/* FR/EN mode visibility */
+.fr,
+.en {
+  display: none;
+}
+
+body.fr-mode .fr {
+  display: block;
+}
+body.fr-mode .en {
+  display: none;
+}
+
+body.en-mode .en {
+  display: block;
+}
+body.en-mode .fr {
+  display: none;
+}
+
+/* Make inline elements work with language mode */
+body.fr-mode span.fr,
+body.fr-mode button.fr {
+  display: inline-block;
+}
+
+body.en-mode span.en,
+body.en-mode button.en {
+  display: inline-block;
+}
